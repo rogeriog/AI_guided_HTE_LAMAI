@@ -9,8 +9,8 @@ At the end of this process, all synthesis protocols should be ready to start the
 
 ***This work is being conducted in the Laboratory of Applied Materials and Interfaces (LAMAI) from the Institute of Chemistry at Federal University of Rio Grande do Sul (UFRGS) in Brazil.***
 
-[1] Introduction - AutoGPT Documentation. Agpt.co. Published 2024. Accessed July 18, 2024. https://docs.agpt.co/autogpt/ 
-[2] Microsoft. (2024). Bing AI (Version 4.0). [Large language model] https://www.bing.com
-[3] OpenAI. (2024). ChatGPT (GPT-4o version) [Large language model] https://openai.com/index/hello-gpt-4o/
-[4] Opentrons Graphical Prognostic for LARP. https://github.com/rogeriog/opentrons_LARP_graphical_prognostic
+[1] Introduction - AutoGPT Documentation. Agpt.co. Published 2024. Accessed July 18, 2024. https://docs.agpt.co/autogpt/ \n
+[2] Microsoft. (2024). Bing AI (Version 4.0). [Large language model] https://www.bing.com \n
+[3] OpenAI. (2024). ChatGPT (GPT-4o version) [Large language model] https://openai.com/index/hello-gpt-4o/ \n
+[4] Opentrons Graphical Prognostic for LARP. https://github.com/rogeriog/opentrons_LARP_graphical_prognostic \n
 ‌
