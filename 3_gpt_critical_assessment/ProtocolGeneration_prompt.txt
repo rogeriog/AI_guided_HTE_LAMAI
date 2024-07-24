@@ -1,0 +1,262 @@
+********************
+SETTING STAGE PROMPT
+********************
+
+In the following I present you the code to setup a LARP synthesis in our custom protocol, the labware will remain as presented in the code and when asked, you should provide appropriate entries for the LARP synthesis to be performed.
+solution_nicknames (name of the solutions of reactants, ligands and additives)
+initial_solutions  (the initial setup in the left side racks containing all precursor, ligands and additives, that should be distributed accordingly with enough quantities to conduct the synthesis)
+intermediate_solutions (the solution prepared in the good solvent in the LARP synthesis containing appropriate quantities of precursors and ligands)
+final_solutions (this entry contains the antisolvent solutions to be prepared in the right side racks along with the quantity and source of the intermediate solution that will be injected subsequently. These will be the final solution with nanocrystals after the injection)
+
+---------- EXAMPLE ENTRIES FOR LARP PROTOCOL ----------
+
+tiprack = protocol.load_labware(
+          "opentrons_96_tiprack_1000ul", location="11"
+     )
+     right_pipette = protocol.load_instrument(
+        "p1000_single_gen2", mount="right", tip_racks=[tiprack]
+     )
+     MAX_VOLUME = 1000 # maximum volume the pipette can handle
+     ## definir numero de antisolvent solutions por step para trocar a pipeta.
+     
+     ##### starting deck ##### YOU SHOULDN'T HAVE TO CHANGE THIS
+     precursors_20_pos7 = protocol.load_labware("lamaiufrgscinza_12_tuberack_20000ul",  location='7')
+     # lamaiufrgscinza_12_tuberack_20000ul contains 12 wells with 20 ml each
+     precursors_15_pos4 = protocol.load_labware("lamaiufrgsbranco_12_tuberack_15000ul",  location='4')
+     # lamaiufrgsbranco_12_tuberack_15000ul contains 12 wells with 15 ml each
+     precursor_reservoir_pos1 = protocol.load_labware("nest_1_reservoir_290ml",  location='1')
+     # nest_1_reservoir_290ml contains 1 well with 290 ml
+
+     intermediate_solutions_15_pos5 = protocol.load_labware("lamaiufrgsbranco_12_tuberack_15000ul",  location='5')
+
+     resulting_solutions_20_pos9 = protocol.load_labware("lamaiufrgscinza_12_tuberack_20000ul",  location='9')
+     resulting_solutions_5_pos6 = protocol.load_labware("lamaiufrgspreto24_24_tuberack_5000ul",  location='6')
+     # lamaiufrgspreto24_24_tuberack_5000ul contains 24 wells with 5 ml each
+     resulting_solutions_5_pos3 = protocol.load_labware("lamaiufrgspreto24_24_tuberack_5000ul",  location='3')
+
+
+     ## colors available are: red, green, blue, yellow, magenta, cyan, brown, orange,
+     ## purple, pink, golden, darkcyan, lime
+     solution_colors = {  
+     'precursor_solution_1': 'red',
+     'precursor_solution_2': 'yellow',
+     'precursor_solution_3': 'cyan',
+     'precursor_solution_4': 'lime',
+     'ligand_1' : 'magenta',
+     'ligand_2' : 'green',
+     'ligand_3' : 'pink',
+     'ligand_4' : 'darkcyan',
+     'reactant_1': 'brown',
+     'reactant_2': 'orange',
+     'reactant_3': 'purple',
+     'antisolvent': 'blue',
+     'antisolvent_2': 'golden',
+     }
+     
+     solution_nicknames = {  ## modify accordingly
+     'precursor_solution_1': 'Precursor 1',
+     'precursor_solution_2': 'Precursor 2',
+     'precursor_solution_3': 'Precursor 3',
+     'precursor_solution_4': 'Precursor 4',
+     'ligand_1' : 'Ligand 1',
+     'ligand_2' : 'Ligand 2',
+     'ligand_3' : 'Ligand 3',
+     'ligand_4' : 'Ligand 4',
+     'reactant_1': 'Reactant 1',
+     'reactant_2': 'Reactant 2',
+     'reactant_3': 'Reactant 3',
+     'antisolvent': 'Antisolvent',
+     'antisolvent_2': 'Antisolvent 2',
+     'intermediate_solution': 'Intermediate Solution'
+     }
+
+     initial_solutions = {
+          "precursor_solution_1": [
+            {"container": precursors_20_pos7, "positions": ["A1", "B1", "C1", "A2", "B2", "C2"], 
+             "volume": 15_000}
+        ],
+          "precursor_solution_2": [
+            {"container": precursors_20_pos7, "positions": ["A3", "B3", "C3", "A4", "B4", "C4"], 
+             "volume": 15_000}
+        ],
+          "ligand_1": [
+            {"container": precursors_15_pos4, "positions": ["A1", "A2", "A3", "A4"], 
+             "volume": 10_000}
+        ],
+          "ligand_2": [
+            {"container": precursors_15_pos4, "positions": ["B1", "B2", "B3", "B4"], 
+             "volume": 10_000}
+        ],
+          "antisolvent": [
+            {"container": precursor_reservoir_pos1, "positions": ["A1"], 
+             "volume": 290_000},
+            {"container": precursors_15_pos4, "positions": ["C1", "C2", "C3", "C4"], 
+             "volume": 10_000 },
+        ]
+     }
+
+     intermediate_solutions = [ 
+        {"container": intermediate_solutions_15_pos5, "positions": ["A1", "A2"], 
+         "solutions": {
+            "precursor_solution_1": 4_000,
+            "precursor_solution_2": 4_000,
+            "ligand_1": 50,
+            "ligand_2": 50
+            }},
+        {"container": intermediate_solutions_15_pos5, "positions": ["A3", "A4"], 
+         "solutions": {
+            "precursor_solution_1": 4_000,
+            "precursor_solution_2": 4_000,
+            "ligand_1": 100,
+            "ligand_2": 100
+            }},
+            {"container": intermediate_solutions_15_pos5, "positions": ["B1", "B2"], 
+         "solutions": {
+            "precursor_solution_1": 4_000,
+            "precursor_solution_2": 4_000,
+            "ligand_1": 150,
+            "ligand_2": 150
+            }},
+        {"container": intermediate_solutions_15_pos5, "positions": ["B3", "B4"],
+            "solutions": {
+                "precursor_solution_1": 4_000,
+                "precursor_solution_2": 4_000,
+                "ligand_1": 200,
+                "ligand_2": 200
+                }},
+        {"container": intermediate_solutions_15_pos5, "positions": ["C1", "C2"],
+            "solutions": {
+                "precursor_solution_1": 4_000,
+                "precursor_solution_2": 4_000,
+                "ligand_1": 250,
+                "ligand_2": 250
+                }},
+        {"container": intermediate_solutions_15_pos5, "positions": ["C3", "C4"],
+            "solutions": {
+                "precursor_solution_1": 4_000,
+                "precursor_solution_2": 4_000,
+                "ligand_1": 300,
+                "ligand_2": 300
+                }}
+        ]
+     
+     final_solutions = [
+        {"container": resulting_solutions_5_pos6, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+            "solutions": {
+                "antisolvent": 1_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":1_000}
+                }},
+        {"container": resulting_solutions_5_pos6, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+            "solutions": {
+                "antisolvent": 2_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A2",
+                                          # "wells": ["A1", "A2"], 
+                                          "volume":1_000}
+                }},
+        {"container": resulting_solutions_5_pos6, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+            "solutions": {
+                "antisolvent": 3_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A2",
+\                                          "volume":1_000}
+                }},
+        {"container": resulting_solutions_5_pos6, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+            "solutions": {
+                "antisolvent": 4_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A2",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":1_000}
+                }},
+        {"container": resulting_solutions_5_pos3, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+            "solutions": {
+                "antisolvent": 2_500,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":500}
+                }},
+        {"container": resulting_solutions_5_pos3, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+            "solutions": {
+                "antisolvent": 3_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":500}
+                }},
+        {"container": resulting_solutions_5_pos3, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+            "solutions": {
+                "antisolvent": 3_500,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":500}
+                }},
+        {"container": resulting_solutions_5_pos3, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+            "solutions": {
+                "antisolvent": 4_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":500}
+                }},
+        {"container": resulting_solutions_20_pos9, "positions": ["A1", "A2", "A3", "A4", "B1", "B2"],
+            "solutions": {
+                "antisolvent": 9_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":1_000}
+                }},
+        {"container": resulting_solutions_20_pos9, "positions": ["B3", "B4", "C1", "C2", "C3", "C4"],
+            "solutions": {
+                "antisolvent": 10_000,
+                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                          "well": "A1",
+                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
+                                          "volume":1_000}
+                }}
+    ]
+
+----------
+When asked to produce new entries, you should be able to set the quantities in accordance to the maximum volume in each well in each rack, notice that you should keep a margin of about 1 ml (or 1000 ul) to the maximum volume in each well to allow for the insertion of the pippete.
+Inform if the instructions are clear for you, and try to describe the rack positions along with the well disposition in the example rack. State how the well naming system works.
+
+
+
+
+*********************
+FOLLOW-UP PROMPT (adjust the proposed synthesis and notes as necessary)
+*********************
+
+Produce new entries for the LARP synthesis based on the following synthesis design, notice that the precursor solutions include the solvent already.
+Give the solution_nicknames, initial_solutions, intermediate_solutions and final_solutions, explain your rationale before outputing each. 
+Some important notes:
+- Remember to keep at least 1 ml free in each well for pippete entry.
+
+----proposed synthesis----
+Vary the concentration of Ligands (OA and OAm) and Solvent (DMF)
+Initial Set Up:
+
+Precursor 1 Type and Quantity: PbBr2, 0.1 mmol
+Precursor 2 Type and Quantity: CsBr, 0.1 mmol
+Ligand 1 Type and Quantity: OA (vary concentrations from 0.5 mL to 1.5 mL in increments of 0.25 mL)
+Ligand 2 Type and Quantity: OAm (vary concentrations from 0.5 mL to 1.5 mL in increments of 0.25 mL)
+Solvent Type and Quantity: DMF (vary concentrations from 2 mL to 6 mL in increments of 1 mL)
+Antisolvent Type and Quantity: Toluene, 10 mL
+Rationale:
+
+Ligands like OA and OAm are critical in controlling the nucleation and growth of CsPbBr3 nanoparticles. Higher ligand concentrations generally lead to smaller particle sizes due to better capping and stabilization effects.
+Varying DMF concentrations will help in understanding its impact on particle dispersion and stability.
+Keeping the antisolvent (Toluene) constant ensures that the variations are primarily due to ligands and solvents.
+
+Final Set Up for First Synthesis:
+OA 0.5 mL, OAm 0.5 mL, DMF varying from 2 mL to 6 mL
+OA 0.75 mL, OAm 0.75 mL, DMF varying from 2 mL to 6 mL
+OA 1.0 mL, OAm 1.0 mL, DMF varying from 2 mL to 6 mL
+OA 1.5 mL, OAm 1.5 mL, DMF varying from 2 mL to 6 mL
+-------

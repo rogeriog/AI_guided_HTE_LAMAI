@@ -40,19 +40,23 @@ def run(protocol: protocol_api.ProtocolContext):
      
      ##### starting deck ##### YOU SHOULDN'T HAVE TO CHANGE THIS
      precursors_20_pos7 = protocol.load_labware("lamaiufrgscinza_12_tuberack_20000ul",  location='7')
+     # lamaiufrgscinza_12_tuberack_20000ul contains 12 wells with 20 ml each
      precursors_15_pos4 = protocol.load_labware("lamaiufrgsbranco_12_tuberack_15000ul",  location='4')
+     # lamaiufrgsbranco_12_tuberack_15000ul contains 12 wells with 15 ml each
      precursor_reservoir_pos1 = protocol.load_labware("nest_1_reservoir_290ml",  location='1')
-     # lamaiufrgsreservatoriotemp_1_reservoir_80000ul
-     # precursor_reservoir_pos2 = protocol.load_labware("nest_1_reservoir_290ml",  location='2')
+     # nest_1_reservoir_290ml contains 1 well with 290 ml
 
      intermediate_solutions_15_pos5 = protocol.load_labware("lamaiufrgsbranco_12_tuberack_15000ul",  location='5')
+     intermediate_solutions_15_pos2 = protocol.load_labware("lamaiufrgsbranco_12_tuberack_15000ul",  location='2')
 
      resulting_solutions_20_pos9 = protocol.load_labware("lamaiufrgscinza_12_tuberack_20000ul",  location='9')
      resulting_solutions_5_pos6 = protocol.load_labware("lamaiufrgspreto24_24_tuberack_5000ul",  location='6')
+     # lamaiufrgspreto24_24_tuberack_5000ul contains 24 wells with 5 ml each
      resulting_solutions_5_pos3 = protocol.load_labware("lamaiufrgspreto24_24_tuberack_5000ul",  location='3')
 
 
-      ## colors available are: red, green, blue, yellow, magenta, cyan, brown, orange
+     ## colors available are: red, green, blue, yellow, magenta, cyan, brown, orange,
+     ## purple, pink, golden, darkcyan, lime
      solution_colors = {  
      'precursor_solution_1': 'red',
      'precursor_solution_2': 'yellow',
@@ -70,174 +74,299 @@ def run(protocol: protocol_api.ProtocolContext):
      }
      
      solution_nicknames = {  ## modify accordingly
-     'precursor_solution_1': 'Precursor 1',
-     'precursor_solution_2': 'Precursor 2',
-     'precursor_solution_3': 'Precursor 3',
+     'precursor_solution_1': 'CsBr + DMF (saturated)',
+     'precursor_solution_2': 'PbBr2 + DMF (saturated)',
+     'precursor_solution_3': 'DMF',
      'precursor_solution_4': 'Precursor 4',
-     'ligand_1' : 'Ligand 1',
-     'ligand_2' : 'Ligand 2',
+     'ligand_1' : 'Oleylamine',
+     'ligand_2' : 'Oleic Acid',
      'ligand_3' : 'Ligand 3',
      'ligand_4' : 'Ligand 4',
      'reactant_1': 'Reactant 1',
      'reactant_2': 'Reactant 2',
      'reactant_3': 'Reactant 3',
-     'antisolvent': 'Antisolvent',
+     'antisolvent': 'Toluene',
      'antisolvent_2': 'Antisolvent 2',
      'intermediate_solution': 'Intermediate Solution'
      }
 
      initial_solutions = {
-          "precursor_solution_1": [
-            {"container": precursors_20_pos7, "positions": ["A1", "B1", "C1", "A2", "B2", "C2"], 
-             "volume": 15_000}
-        ],
-          "precursor_solution_2": [
-            {"container": precursors_20_pos7, "positions": ["A3", "B3", "C3", "A4", "B4", "C4"], 
-             "volume": 15_000}
-        ],
-          "ligand_1": [
-            {"container": precursors_15_pos4, "positions": ["A1", "A2", "A3", "A4"], 
-             "volume": 10_000}
-        ],
-          "ligand_2": [
-            {"container": precursors_15_pos4, "positions": ["B1", "B2", "B3", "B4"], 
-             "volume": 10_000}
-        ],
-          "antisolvent": [
-            {"container": precursor_reservoir_pos1, "positions": ["A1"], 
-             "volume": 290_000},
-            {"container": precursors_15_pos4, "positions": ["C1", "C2", "C3", "C4"], 
-             "volume": 10_000 },
-        ]
+     "precursor_solution_1": [
+          {"container": precursors_20_pos7, "positions": ["A1", "A2"], "volume": 19_000}  # Assuming a solid, so no exact volume needed
+     ],
+     "precursor_solution_2": [
+          {"container": precursors_20_pos7, "positions": ["B1","B2"], "volume": 19_000}
+     ],
+     "ligand_1": [
+          {"container": precursors_15_pos4, "positions": ["A1", "A2", "A3"], "volume": 15_000}  # Ensure enough for varying concentrations
+     ],
+     "ligand_2": [
+          {"container": precursors_15_pos4, "positions": ["B1", "B2", "B3"], "volume": 15_000}
+     ],
+     "precursor_solution_3": [
+          {"container": precursors_20_pos7, "positions": ["C1", "C2", "C3", "C4"], "volume": 19_000}  # Large volume to accommodate varying needs
+     ],
+     "antisolvent": [
+          {"container": precursor_reservoir_pos1, "positions": ["B1"], "volume": 290_000}
+     ]
      }
 
-     intermediate_solutions = [ 
-        {"container": intermediate_solutions_15_pos5, "positions": ["A1", "A2"], 
-         "solutions": {
-            "precursor_solution_1": 4_000,
-            "precursor_solution_2": 4_000,
-            "ligand_1": 50,
-            "ligand_2": 50
-            }},
-        {"container": intermediate_solutions_15_pos5, "positions": ["A3", "A4"], 
-         "solutions": {
-            "precursor_solution_1": 4_000,
-            "precursor_solution_2": 4_000,
-            "ligand_1": 100,
-            "ligand_2": 100
-            }},
-            {"container": intermediate_solutions_15_pos5, "positions": ["B1", "B2"], 
-         "solutions": {
-            "precursor_solution_1": 4_000,
-            "precursor_solution_2": 4_000,
-            "ligand_1": 150,
-            "ligand_2": 150
-            }},
-        {"container": intermediate_solutions_15_pos5, "positions": ["B3", "B4"],
-            "solutions": {
-                "precursor_solution_1": 4_000,
-                "precursor_solution_2": 4_000,
-                "ligand_1": 200,
-                "ligand_2": 200
-                }},
-        {"container": intermediate_solutions_15_pos5, "positions": ["C1", "C2"],
-            "solutions": {
-                "precursor_solution_1": 4_000,
-                "precursor_solution_2": 4_000,
-                "ligand_1": 250,
-                "ligand_2": 250
-                }},
-        {"container": intermediate_solutions_15_pos5, "positions": ["C3", "C4"],
-            "solutions": {
-                "precursor_solution_1": 4_000,
-                "precursor_solution_2": 4_000,
-                "ligand_1": 300,
-                "ligand_2": 300
-                }}
-        ]
+     intermediate_solutions = [
+    {"container": intermediate_solutions_15_pos5, "positions": ["A1", "A2"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 500,
+        "ligand_2": 500,
+        "precursor_solution_3": 2_000
+        }},
+    {"container": intermediate_solutions_15_pos5, "positions": ["A3", "A4"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 750,
+        "ligand_2": 750,
+        "precursor_solution_3": 2_000
+        }},
+    {"container": intermediate_solutions_15_pos5, "positions": ["B1", "B2"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 1_000,
+        "ligand_2": 1_000,
+        "precursor_solution_3": 2_000
+        }},
+    {"container": intermediate_solutions_15_pos5, "positions": ["B3", "B4"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 1_500,
+        "ligand_2": 1_500,
+        "precursor_solution_3": 2_000
+        }},
+    {"container": intermediate_solutions_15_pos5, "positions": ["C1", "C2"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 1_500,
+        "ligand_2": 1_500,
+        "precursor_solution_3": 3_000
+        }},
+    {"container": intermediate_solutions_15_pos5, "positions": ["C3", "C4"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 1_500,
+        "ligand_2": 1_500,
+        "precursor_solution_3": 4_000
+        }},
+    {"container": intermediate_solutions_15_pos2, "positions": ["A1", "A2"], 
+     "solutions": {
+        "precursor_solution_1": 4_000,
+        "precursor_solution_2": 4_000,
+        "ligand_1": 1_500,
+        "ligand_2": 1_500,
+        "precursor_solution_3": 6_000
+        }}
+     ]
+     # intermediate_solutions = [ 
+     #    {"container": intermediate_solutions_15_pos5, "positions": ["A1", "A2"], 
+     #     "solutions": {
+     #        "precursor_solution_1": 4_000,
+     #        "precursor_solution_2": 4_000,
+     #        "ligand_1": 50,
+     #        "ligand_2": 50
+     #        }},
+     #    {"container": intermediate_solutions_15_pos5, "positions": ["A3", "A4"], 
+     #     "solutions": {
+     #        "precursor_solution_1": 4_000,
+     #        "precursor_solution_2": 4_000,
+     #        "ligand_1": 100,
+     #        "ligand_2": 100
+     #        }},
+     #        {"container": intermediate_solutions_15_pos5, "positions": ["B1", "B2"], 
+     #     "solutions": {
+     #        "precursor_solution_1": 4_000,
+     #        "precursor_solution_2": 4_000,
+     #        "ligand_1": 150,
+     #        "ligand_2": 150
+     #        }},
+     #    {"container": intermediate_solutions_15_pos5, "positions": ["B3", "B4"],
+     #        "solutions": {
+     #            "precursor_solution_1": 4_000,
+     #            "precursor_solution_2": 4_000,
+     #            "ligand_1": 200,
+     #            "ligand_2": 200
+     #            }},
+     #    {"container": intermediate_solutions_15_pos5, "positions": ["C1", "C2"],
+     #        "solutions": {
+     #            "precursor_solution_1": 4_000,
+     #            "precursor_solution_2": 4_000,
+     #            "ligand_1": 250,
+     #            "ligand_2": 250
+     #            }},
+     #    {"container": intermediate_solutions_15_pos5, "positions": ["C3", "C4"],
+     #        "solutions": {
+     #            "precursor_solution_1": 4_000,
+     #            "precursor_solution_2": 4_000,
+     #            "ligand_1": 300,
+     #            "ligand_2": 300
+     #            }}
+     #    ]
      
      final_solutions = [
-        {"container": resulting_solutions_5_pos6, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
-            "solutions": {
-                "antisolvent": 1_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }},
-        {"container": resulting_solutions_5_pos6, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
-            "solutions": {
-                "antisolvent": 2_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A2",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }},
-        {"container": resulting_solutions_5_pos6, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
-            "solutions": {
-                "antisolvent": 3_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A2",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }},
-        {"container": resulting_solutions_5_pos6, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
-            "solutions": {
-                "antisolvent": 4_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A2",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }},
-        {"container": resulting_solutions_5_pos3, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
-            "solutions": {
-                "antisolvent": 2_500,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":500}
-                }},
-        {"container": resulting_solutions_5_pos3, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
-            "solutions": {
-                "antisolvent": 3_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":500}
-                }},
-        {"container": resulting_solutions_5_pos3, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
-            "solutions": {
-                "antisolvent": 3_500,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":500}
-                }},
-        {"container": resulting_solutions_5_pos3, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
-            "solutions": {
-                "antisolvent": 4_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":500}
-                }},
-        {"container": resulting_solutions_20_pos9, "positions": ["A1", "A2", "A3", "A4", "B1", "B2"],
-            "solutions": {
-                "antisolvent": 9_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }},
-        {"container": resulting_solutions_20_pos9, "positions": ["B3", "B4", "C1", "C2", "C3", "C4"],
-            "solutions": {
-                "antisolvent": 10_000,
-                "intermediate_solution": {"container": intermediate_solutions_15_pos5,
-                                          "well": "A1",
-                                          # "wells": ["A1", "A2"], ## depois implementar checar wells
-                                          "volume":1_000}
-                }}
-    ]
+    {"container": resulting_solutions_5_pos6, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "A1",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos6, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "A3",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos6, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "B1",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos6, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "B3",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos3, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "C1",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos3, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+                                      "well": "C3",
+                                      "volume": 400}
+            }},
+    {"container": resulting_solutions_5_pos3, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+        "solutions": {
+            "antisolvent": 4_000,
+            "intermediate_solution": {"container": intermediate_solutions_15_pos2,
+                                      "well": "A1",
+                                      "volume": 400}
+            }},
+#     {"container": resulting_solutions_5_pos3, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+#         "solutions": {
+#             "antisolvent": 4_000,
+#             "intermediate_solution": {"container": intermediate_solutions_15_pos2,
+#                                       "well": ["A3","A4"],
+#                                       "volume": 400}
+#             }},
+#     {"container": resulting_solutions_20_pos9, "positions": ["A1", "A2", "A3", "A4", "B1", "B2"],
+#         "solutions": {
+#             "antisolvent": 4_000,
+#             "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                       "well": "C1",
+#                                       "volume": 1_000}
+#             }},
+#     {"container": resulting_solutions_20_pos9, "positions": ["B3", "B4", "C1", "C2", "C3", "C4"],
+#         "solutions": {
+#             "antisolvent": 4_000,
+#             "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                       "well": "C2",
+#                                       "volume": 1_000}
+#             }}
+     ]
+#      final_solutions = [
+#         {"container": resulting_solutions_5_pos6, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+#             "solutions": {
+#                 "antisolvent": 1_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":1_000}
+#                 }},
+#         {"container": resulting_solutions_5_pos6, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+#             "solutions": {
+#                 "antisolvent": 2_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A2",
+#                                           # "wells": ["A1", "A2"], 
+#                                           "volume":1_000}
+#                 }},
+#         {"container": resulting_solutions_5_pos6, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+#             "solutions": {
+#                 "antisolvent": 3_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A2",
+# \                                          "volume":1_000}
+#                 }},
+#         {"container": resulting_solutions_5_pos6, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+#             "solutions": {
+#                 "antisolvent": 4_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A2",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":1_000}
+#                 }},
+#         {"container": resulting_solutions_5_pos3, "positions": ["A1", "A2", "A3", "A4", "A5", "A6"],
+#             "solutions": {
+#                 "antisolvent": 2_500,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":500}
+#                 }},
+#         {"container": resulting_solutions_5_pos3, "positions": ["B1", "B2", "B3", "B4", "B5", "B6"],
+#             "solutions": {
+#                 "antisolvent": 3_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":500}
+#                 }},
+#         {"container": resulting_solutions_5_pos3, "positions": ["C1", "C2", "C3", "C4", "C5", "C6"],
+#             "solutions": {
+#                 "antisolvent": 3_500,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":500}
+#                 }},
+#         {"container": resulting_solutions_5_pos3, "positions": ["D1", "D2", "D3", "D4", "D5", "D6"],
+#             "solutions": {
+#                 "antisolvent": 4_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":500}
+#                 }},
+#         {"container": resulting_solutions_20_pos9, "positions": ["A1", "A2", "A3", "A4", "B1", "B2"],
+#             "solutions": {
+#                 "antisolvent": 9_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":1_000}
+#                 }},
+#         {"container": resulting_solutions_20_pos9, "positions": ["B3", "B4", "C1", "C2", "C3", "C4"],
+#             "solutions": {
+#                 "antisolvent": 10_000,
+#                 "intermediate_solution": {"container": intermediate_solutions_15_pos5,
+#                                           "well": "A1",
+#                                           # "wells": ["A1", "A2"], ## depois implementar checar wells
+#                                           "volume":1_000}
+#                 }}
+#     ]
 
 
      ### NOTHING TO CHANGE BELOW THIS LINE
@@ -383,7 +512,7 @@ def run(protocol: protocol_api.ProtocolContext):
                     if key in list_of_wells:
                          del intermediate_deck[container][key]
           
-          # pdb.set_trace()
+          #  
           intermediate_total_vols = {}
           for solution in intermediate_solutions:
                container = int(str(solution["container"]._wells_by_name['A1']).split()[-1])
@@ -406,7 +535,7 @@ def run(protocol: protocol_api.ProtocolContext):
           for solution in final_solutions:
                container = int(str(solution["container"]._wells_by_name['A1']).split()[-1])
                positions = solution["positions"]
-               # pdb.set_trace()
+               #  
                for solution_type in solution["solutions"]:
                     if solution_type == 'intermediate_solution':
                          continue
@@ -421,7 +550,7 @@ def run(protocol: protocol_api.ProtocolContext):
                               intermediate_total_vols[solution_type] = 0
                          intermediate_total_vols[solution_type] += solution["solutions"][solution_type]
           
-          # pdb.set_trace()
+          #  
           # check keys in intermediate deck
           for key in intermediate_deck:
                # check if the subkeys contain solutions
@@ -469,11 +598,13 @@ def run(protocol: protocol_api.ProtocolContext):
                     if isinstance(final_deck[container][position]["solutions"]["intermediate_solution"], dict):
                          intermediate_sol_origin = final_deck[container][position]["solutions"]["intermediate_solution"]
                          intermediate_sol_container = intermediate_sol_origin["container"]
+                         #  
                          intermediate_sol_well = intermediate_sol_origin["well"]
                          intermediate_sol_vol = intermediate_sol_origin["volume"]
                          ### sum the total volume of intermediate solution
                          final_total_vols["intermediate_solution"] += intermediate_sol_vol
                          ###
+                         #  
                          intermediate_sol_slot = int(str(intermediate_sol_container._wells_by_name[intermediate_sol_well]).split()[-1])
                          intermediate_solution = intermediate_deck[intermediate_sol_slot][intermediate_sol_well] 
                          # sum volumes in intermediate solution
@@ -483,7 +614,7 @@ def run(protocol: protocol_api.ProtocolContext):
                          vol_frac = intermediate_sol_vol / total_vol
                          for sol in intermediate_solution["solutions"]:
                               final_deck[container][position]["solutions"][sol] = intermediate_solution["solutions"][sol] * vol_frac
-          # pdb.set_trace()
+          #  
 
 
           def set_deck_from_dict(number, deck, deck_params):
@@ -491,7 +622,7 @@ def run(protocol: protocol_api.ProtocolContext):
                     print(f"Error: Expected a dictionary for deck, but got {type(deck).__name__}")
                     return None
                labware = deck.get(number, None)
-               # pdb.set_trace()
+               #  
                if labware is not None:
                     # get rows and columns from ordering
                     inner_rect_width = deck_params['subdivision_width_x'] / 1.2
@@ -542,7 +673,7 @@ def run(protocol: protocol_api.ProtocolContext):
                                    for solution in solutions:
                                         if solution == 'intermediate_solution':
                                              continue
-                                        # pdb.set_trace()
+                                        #  
                                         radius = solutions[solution] / (labware['well_volume'] * 0.8)
                                         fig.add_shape(
                                              type="circle",
@@ -715,7 +846,7 @@ def run(protocol: protocol_api.ProtocolContext):
                          container[position].load_liquid(liquid=liquid, volume=volume)
                          container[position].liquid = [liquid]  ## there should exist by default but i couldnt find.
                          container[position].volume = volume 
-                         # import pdb; pdb.set_trace()
+                         # import pdb;  
                     print(f"Loaded {liquid.name} corresponding to {solution_type} into {container} positions {positions} with volume {volume}")
           # PARAMETERS AND BASE FUNCTIONS FOR THE PROTOCOL
           ## default speed is 400
@@ -849,7 +980,7 @@ def run(protocol: protocol_api.ProtocolContext):
           # I should read the antisolvent_solutions and transfer the antisolvent volume
           # corresponding to each resulting solution
           for antisolvent_solution in backup_final_solutions:
-               # pdb.set_trace()
+               #  
                container = antisolvent_solution["container"]
                positions = antisolvent_solution["positions"]
                solutions = antisolvent_solution["solutions"]

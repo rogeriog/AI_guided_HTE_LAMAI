@@ -1,0 +1,36 @@
+DOI,Sample Identification,Precursor 1 Type,Precursor 1 Quantity,Precursor 2 Type,Precursor 2 Quantity,Ligand 1 Type,Ligand 1 Quantity,Ligand 2 Type,Ligand 2 Quantity,Additive 1 Type,Additive 1 Quantity,Additive 2 Type,Additive 2 Quantity,Solvent Type,Solvent Quantity,Antisolvent Type,Antisolvent Quantity,Particle Size,Colloidal Stability,PLQY Value,PLQY Quality,Band Gap/PL emission,Stability
+10.1007/s10853-023-09092-0,with Urea,PbBr2,0.48 mmol,CsBr,0.4 mmol,OA,1.0 mL,OAm,0.5 mL,Urea,2-10 mg,-,-,DMF,10 mL,Toluene,10 mL,15.3 nm,,Up to 80%,High,2.34 eV,Improved
+10.1007/s10853-023-09092-0,without Urea,PbBr2,0.48 mmol,CsBr,0.4 mmol,OA,1.0 mL,OAm,0.5 mL,None,None,-,-,DMF,10 mL,Toluene,10 mL,15.3 nm,,Lower,Lower,2.35 eV,Lower
+10.1021/acsnano.5b08193,CsPbBr3 Quantum Dots,PbBr2,0.05 mmol,Cs-oleate,0.05 mL,Hexanoic acid,0.1 mmol,Octylamine,0.1 mmol,-,-,-,-,DMF,1 mL,Toluene,2 mL,4.3 nm,High,81%,High,2.46 eV,High
+10.1021/acsnano.5b08193,CsPbI3 Quantum Dots,PbI2,0.1 mmol,Cs-oleate,0.1 mL,Hexanoic acid,0.6 mmol,Octylamine,0.6 mmol,ZnI2,0.2 mmol,-,-,DMF,2 mL,Toluene,2 mL,5.0 nm,-,-,-,-,-
+10.1021/acsnano.5b08193,CsPbBr3 Nanocubes,PbBr2,0.1 mmol,Cs-oleate,0.1 mL,Oleic acid,1.55 mmol,Dodecylamine,0.086 mmol,-,-,-,-,DMF,2 mL,Toluene,2 mL,9 nm,High,90%,High,2.44 eV,High
+10.1021/acsnano.5b08193,CsPbBr3 Nanorods,PbBr2,0.1 mmol,Cs-oleate,0.1 mL,Acetate acid,1.55 mmol,Dodecylamine,0.086 mmol,-,-,-,-,DMF,2 mL,Toluene,2 mL,"200 nm (length), 10 nm (diameter)",Moderate,-,Moderate,2.41 eV,Moderate
+10.1021/acsnano.5b08193,CsPbBr3 Nanoplatelets,PbBr2,0.1 mmol,Cs-oleate,0.1 mL,Oleic acid,0.031 mmol,Octylamine,0.362 mmol,-,-,-,-,DMF,2 mL,Toluene,2 mL,"100 nm (edge length), 5.2 nm (thickness)",High,-,High,2.41 eV,High
+https://doi.org/10.3390/nano14010081,HI-NPOlam,PbBr2,0.075 mmol,Cs2CO3,0.2 mmol,Olam,0.8 mmol,OA,0.8 mmol,-,-,-,-,ODE,2 mL,EtAc,3:1 vol ratio,8 nm,High,Low,Moderate,-,Moderate
+https://doi.org/10.3390/nano14010081,HI-NPDDAB,PbBr2,0.075 mmol,Cs2CO3,0.2 mmol,OA,0.8 mmol,DDAB,0.1 mmol,-,-,-,-,ODE,2 mL,EtAc,3:1 vol ratio,10 nm,Moderate,Moderate,Good,-,High
+https://doi.org/10.3390/nano14010081,HI-NPOPA-DDAB,PbBr2,0.075 mmol,Cs2CO3,0.2 mmol,OPA,0.3 mmol,TOPO,1.3 mmol,DDAB,0.05 M,-,-,ODE,2 mL,EtAc,3:1 vol ratio,7 nm,High,Moderate,Good,-,High
+https://doi.org/10.3390/nano14010081,LARP-NPOlam,PbBr2,0.1 mmol,Cs-oleate,11 æmol,Olam,-,OA,-,-,-,-,-,Toluene,0.5 mL,EtAc,3:1 vol ratio,9 nm,Low,High,Excellent,-,Moderate
+https://doi.org/10.3390/nano14010081,LARP-NPDDAB,PbBr2,0.1 mmol,Cs-oleate,11 æmol,DDAB,-,OA,-,TOAB,-,-,-,Toluene,0.5 mL,EtAc,3:1 vol ratio,8 nm,Low,High,Excellent,-,Moderate
+https://doi.org/10.3390/nano14010081,LARP-NPOPA-DDAB,PbBr2,0.1 mmol,Cs-oleate,11 æmol,OPA,-,TOPO,-,DDAB,-,-,-,Toluene,0.5 mL,EtAc,3:1 vol ratio,8 nm,Moderate,High,Excellent,-,High
+10.1039/C9NR10726F,TOL-LARP,CsBr,0.040 M,PbBr2,0.040 M,OA,10 v/v %,OLA,5 v/v %,-,-,-,-,DMF,1.0 mL,Toluene,10 mL,8.4 ñ 2.5 nm,Moderate,25%,Moderate,~2.4 eV,Moderate
+10.1039/C9NR10726F,EA-LARP,CsBr,0.040 M,PbBr2,0.040 M,OA,4.0 v/v %,OLA,2.0 v/v %,-,-,-,-,DMF,1.0 mL,Ethyl Acetate,15 mL,9.2 ñ 2.7 nm,High,21%,Moderate,~2.3 eV,High
+10.1039/C9NR10726F,EA-LARP with C8NH2,CsBr,0.040 M,PbBr2,0.040 M,OA,4.0 v/v %,C8NH2,2.0 v/v %,-,-,-,-,DMF,1.0 mL,Ethyl Acetate,15 mL,8.7 nm,Very High,>80%,High,~2.3 eV,Very High
+10.1007/s10853-018-3104-8,CsPbBr3,CsBr,1.2 mmol,PbBr2,0.4 mmol,OAm,0.5 mL,OA,1.0 mL,TEOS,0 mL,Ethanol,14.8 mL,DMF,10 mL,Water,2 mL,~200 nm,Moderate,Not specified,Moderate,529 nm,Moderate
+10.1007/s10853-018-3104-8,CsPbBr3/SiO2,CsBr,1.2 mmol,PbBr2,0.4 mmol,OAm,0.5 mL,OA,1.0 mL,TEOS,0.6 mL,Ethanol,14.8 mL,DMF,10 mL,Water,2 mL,~200 nm,High,Not specified,High,529 nm,High
+10.1039/D0TC04519E,Batch LARP (Slow Addition),CsBr,0.040 M,PbBr2,0.040 M,OA,10%,OLA,5%,-,-,-,-,DMF,-,Toluene,-,12.9 ñ 6.0 nm,Moderate,-,-,510 nm,Moderate
+10.1039/D0TC04519E,Batch LARP (Fast Addition),CsBr,0.040 M,PbBr2,0.040 M,OA,10%,OLA,5%,-,-,-,-,DMF,-,Toluene,-,12.1 ñ 5.6 nm,Low,-,-,510 nm,Low
+10.1039/D0TC04519E,MF Passive Mixing,CsBr,0.010 M,PbBr2,0.010 M,OA,10%,OLA,5%,-,-,-,-,DMF,-,Toluene,-,12.3 ñ 6.6 nm,Low,-,-,510 nm,Low
+10.1039/D0TC04519E,MF Active Mixing,CsBr,0.010 M,PbBr2,0.010 M,OA,10%,OLA,5%,-,-,-,-,DMF,-,Toluene,-,11.4 ñ 4.7 nm,High,-,-,510 nm,High
+10.1007/s12274-023-6326-2,Hot Injection,PbBr2,0.188 mmol,Cs-oleate,0.125 mmol,Oleic acid,0.5 mL,Oleylamine,0.5 mL,-,-,-,-,Octadecene,5 mL,-,-,10-15 nm,High,85%,High,2.36 eV,High
+10.1007/s12274-023-6326-2,Ligand-Assisted Reprecipitation,PbBr2,0.188 mmol,CsBr,0.125 mmol,Oleic acid,0.5 mL,Oleylamine,0.5 mL,-,-,-,-,DMF,5 mL,Toluene,10 mL,8-12 nm,Moderate,75%,Moderate,2.38 eV,Moderate
+10.1007/s12598-021-01856-4,1-1-supernatants,CsBr,1,PbBr?,1,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,Trace,Low,-,-,~510 nm,Low
+10.1007/s12598-021-01856-4,1-1-precipitates,CsBr,1,PbBr?,1,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,-,Low,-,-,~510 nm,Low
+10.1007/s12598-021-01856-4,1-2-supernatants,CsBr,1,PbBr?,2,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,3.8 nm,High,-,-,~461 nm,High
+10.1007/s12598-021-01856-4,1-2-precipitates,CsBr,1,PbBr?,2,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,30-400 nm,High,-,-,~516 nm,High
+10.1007/s12598-021-01856-4,1-3-supernatants,CsBr,1,PbBr?,3,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,-,High,-,-,-,High
+10.1007/s12598-021-01856-4,1-3-precipitates,CsBr,1,PbBr?,3,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,-,High,-,-,-,High
+10.1007/s12598-021-01856-4,1-4-supernatants,CsBr,1,PbBr?,4,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,-,High,-,-,-,High
+10.1007/s12598-021-01856-4,1-4-precipitates,CsBr,1,PbBr?,4,Oleic Acid,1 ml,Oleylamine,0.5 ml,-,-,-,-,DMF,10 ml,Toluene,20 ml,-,High,-,-,-,High
+10.1021/acs.chemmater.0c04569,1,Cs2CO3,32.6 mg,PbBr2,550 mg,OPA,0.1 M,DDAB,0.05 M,-,-,-,-,Toluene,10 mL,Ethyl Acetate,1.5 mL,6.8,High,>80,High,501,High
+10.1021/acs.chemmater.0c04569,2,Cs2CO3,32.6 mg,PbBr2,550 mg,OPA,0.3 M,DDAB,0.05 M,-,-,-,-,Toluene,10 mL,Ethyl Acetate,1.5 mL,10.4,High,>80,High,509,High
+10.1021/acs.chemmater.0c04569,3,Cs2CO3,32.6 mg,PbBr2,550 mg,OPA,0.6 M,DDAB,0.05 M,-,-,-,-,Toluene,10 mL,Ethyl Acetate,1.5 mL,13.6,High,>80,High,517,High
